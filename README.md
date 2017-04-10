@@ -17,7 +17,7 @@ Please Do This ...
 <br />
 5) Config your ISD17XX.h file.
 <br />
-6) call  Isd17xx_Init(void) on your app.
+6) call  Isd17xx_Init() on your app.
 <br />
 8) use Isd17xx_HighLevelRecord() , Isd17xx_HighLevelPlay() , Isd17xx_HighLevelErase() on your app.
 
