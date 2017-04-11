@@ -100,5 +100,6 @@ void		Isd17xx_EraseAddress(uint16_t	StartFrom,uint16_t	EndTo);
 void		Isd17xx_HighLevelRecord(uint16_t	StartFrom,uint16_t	EndTo);
 void		Isd17xx_HighLevelPlay(uint16_t	StartFrom,uint16_t	EndTo);
 void		Isd17xx_HighLevelErase(uint16_t	StartFrom,uint16_t	EndTo);
+void		Isd17xx_HighLevelStop(void);
 //########################################################################################
 #endif

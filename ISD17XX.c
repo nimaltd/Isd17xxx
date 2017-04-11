@@ -392,6 +392,16 @@ void	Isd17xx_HighLevelRecord(uint16_t	StartFrom,uint16_t	EndTo)
 	_ISD17XX_DELAY(10);
 	Isd17xx_RecordAddress(StartFrom,EndTo);
 	Isd17xx_ReadStatus();
+	if(isd17xx.StatusRegister0.CMD_Err==1)
+	{
+		Isd17xx_CheckMemory();
+		do
+		{
+			_ISD17XX_DELAY(50);		
+			Isd17xx_ReadStatus();						
+		}
+		while(isd17xx.StatusRegister0.CMD_Err==1);		
+	}
 	do
 	{
 		_ISD17XX_DELAY(50);		
@@ -407,6 +417,16 @@ void	Isd17xx_HighLevelPlay(uint16_t	StartFrom,uint16_t	EndTo)
 	_ISD17XX_DELAY(10);
 	Isd17xx_PlayAddress(StartFrom,EndTo);
 	Isd17xx_ReadStatus();
+	if(isd17xx.StatusRegister0.CMD_Err==1)
+	{
+		Isd17xx_CheckMemory();
+		do
+		{
+			_ISD17XX_DELAY(50);		
+			Isd17xx_ReadStatus();						
+		}
+		while(isd17xx.StatusRegister0.CMD_Err==1);		
+	}
 	do
 	{
 		_ISD17XX_DELAY(50);		
@@ -422,6 +442,16 @@ void	Isd17xx_HighLevelErase(uint16_t	StartFrom,uint16_t	EndTo)
 	_ISD17XX_DELAY(10);
 	Isd17xx_EraseAddress(StartFrom,EndTo);
 	Isd17xx_ReadStatus();
+	if(isd17xx.StatusRegister0.CMD_Err==1)
+	{
+		Isd17xx_CheckMemory();
+		do
+		{
+			_ISD17XX_DELAY(50);		
+			Isd17xx_ReadStatus();						
+		}
+		while(isd17xx.StatusRegister0.CMD_Err==1);		
+	}
 	do
 	{
 		_ISD17XX_DELAY(50);		
@@ -429,5 +459,18 @@ void	Isd17xx_HighLevelErase(uint16_t	StartFrom,uint16_t	EndTo)
 		
 	}
 	while(isd17xx.StatusRegister1.Erase==1);	
+}
+//##########################################################################################################
+void	Isd17xx_HighLevelStop(void)
+{
+	Isd17xx_Stop();
+	_ISD17XX_DELAY(10);
+	Isd17xx_ReadStatus();
+	do
+	{
+		_ISD17XX_DELAY(50);		
+		Isd17xx_ReadStatus();		
+	}
+	while((isd17xx.StatusRegister1.Erase==1) || (isd17xx.StatusRegister1.Play==1) || (isd17xx.StatusRegister1.Record==1));	
 }
 
